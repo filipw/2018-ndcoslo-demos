@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Convention1", "src\Conventi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Convention2", "src\Convention2\Convention2.csproj", "{BBEA24B7-EEB6-4DD5-A259-25D6A433F2F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelPipelines", "src\ParallelPipelines\ParallelPipelines.csproj", "{7C630FDC-2C92-44E7-ADC1-D5504B8D7C31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParallelPipelines", "src\ParallelPipelines\ParallelPipelines.csproj", "{7C630FDC-2C92-44E7-ADC1-D5504B8D7C31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionConstraint", "src\ActionConstraint\ActionConstraint.csproj", "{8D2D2C5C-8338-44F2-892A-2103B67CA141}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7C630FDC-2C92-44E7-ADC1-D5504B8D7C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C630FDC-2C92-44E7-ADC1-D5504B8D7C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C630FDC-2C92-44E7-ADC1-D5504B8D7C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2D2C5C-8338-44F2-892A-2103B67CA141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2D2C5C-8338-44F2-892A-2103B67CA141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2D2C5C-8338-44F2-892A-2103B67CA141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2D2C5C-8338-44F2-892A-2103B67CA141}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
