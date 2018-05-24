@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System.Reflection;
 
 namespace FileProvider
 {
@@ -15,16 +18,34 @@ namespace FileProvider
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions();
-            services.Configure<AzureBlobOptions>(Configuration.GetSection("AzureBlobOptions"));
-            services.AddSingleton<AzureBlobFileProvider>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var blobOptions = Configuration.GetSection("AzureBlobOptions").Get<AzureBlobOptions>();
+            var azureBlobFileProvider = new AzureBlobFileProvider(blobOptions);
+            services.AddSingleton(blobOptions);
+            services.AddSingleton(azureBlobFileProvider);
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).ConfigureApplicationPartManager(a =>
+            {
+                var binDirectory = azureBlobFileProvider.GetDirectoryContents("bin");
+
+                foreach (var item in binDirectory)
+                {
+                    using (var assemblyStream = item.CreateReadStream())
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            assemblyStream.CopyTo(ms);
+                            var assembly = Assembly.Load(ms.ToArray());
+                            a.ApplicationParts.Add(new AssemblyPart(assembly));
+                        }
+                    }
+                }
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

@@ -11,10 +11,10 @@ namespace FileProvider
     {
         private CloudBlobContainer _container;
 
-        public AzureBlobFileProvider(IOptions<AzureBlobOptions> azureBlobOptions)
+        public AzureBlobFileProvider(AzureBlobOptions azureBlobOptions)
         {
-            var blobClient = new CloudBlobClient(azureBlobOptions.Value.BaseUri, new StorageCredentials(azureBlobOptions.Value.Token));
-            _container = blobClient.GetContainerReference(azureBlobOptions.Value.DocumentContainer);
+            var blobClient = new CloudBlobClient(azureBlobOptions.BaseUri, new StorageCredentials(azureBlobOptions.Token));
+            _container = blobClient.GetContainerReference(azureBlobOptions.DocumentContainer);
         }
 
         public IDirectoryContents GetDirectoryContents(string subpath)
