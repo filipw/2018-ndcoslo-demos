@@ -29,9 +29,6 @@ namespace FileProvider
             return new AzureBlobFileInfo(blob);
         }
 
-        public IChangeToken Watch(string filter)
-        {
-            throw new NotImplementedException();
-        }
+        public IChangeToken Watch(string filter) => throw new NotImplementedException();
     }
 }
