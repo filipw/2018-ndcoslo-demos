@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileProvider", "src\FilePro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalControllers", "src\ExternalControllers\ExternalControllers.csproj", "{B13F30EC-C45B-4ED1-A981-D77B41F42C62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuntimeControllers", "src\RuntimeControllers\RuntimeControllers.csproj", "{30DEB842-7B3F-4DF2-B4A3-EBBC0AF3DA52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuntimeControllers", "src\RuntimeControllers\RuntimeControllers.csproj", "{30DEB842-7B3F-4DF2-B4A3-EBBC0AF3DA52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionsDynamicLambda", "src\OptionsDynamicLambda\OptionsDynamicLambda.csproj", "{8824E805-B9DA-41C8-AD10-CFEF6700AC07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{30DEB842-7B3F-4DF2-B4A3-EBBC0AF3DA52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30DEB842-7B3F-4DF2-B4A3-EBBC0AF3DA52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30DEB842-7B3F-4DF2-B4A3-EBBC0AF3DA52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8824E805-B9DA-41C8-AD10-CFEF6700AC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8824E805-B9DA-41C8-AD10-CFEF6700AC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8824E805-B9DA-41C8-AD10-CFEF6700AC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8824E805-B9DA-41C8-AD10-CFEF6700AC07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
