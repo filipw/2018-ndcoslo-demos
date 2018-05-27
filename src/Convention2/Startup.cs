@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.WebApiCompatShim;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,8 +19,7 @@ namespace Convention2
         {
             services.AddMvc(o =>
                 {
-                    o.Conventions.Add(new WebApiOverloadingApplicationModelConvention());
-                    o.Conventions.Add(new WebApiActionConventionsApplicationModelConvention());
+                    o.Conventions.Add(new RestfulActionApplicationModelConvention());
                 });
         }
 
@@ -29,7 +27,13 @@ namespace Convention2
         {
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                     name: "default",
+                     template: "api/{controller}/{id?}"
+                );
+            });
         }
     }
 }
