@@ -27,11 +27,9 @@ namespace Demos
             app.UseMvc();
         }
 
-        public static void Main(string[] args)
-        {
-            WebHost.CreateDefaultBuilder(args)
+        public static async Task Main(string[] args) =>
+            await WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .Build().Run();
-        }
+                .Build().RunAsync();
     }
 }
