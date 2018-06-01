@@ -46,7 +46,16 @@ namespace RuntimeControllers
                         var buffer = new byte[fs.Length];
                         fs.Read(buffer, 0, (int)fs.Length);
                         var assembly = Assembly.Load(buffer);
-                        _applicationPartManager.ApplicationParts.Add(new FileSystemAssemblyPart(e.FullPath, assembly));
+
+                        if (e.FullPath.EndsWith("Views.dll", StringComparison.OrdinalIgnoreCase))
+                        {
+                            _applicationPartManager.ApplicationParts.Add(new FileSystemCompiledRazorAssemblyPart(e.FullPath, assembly));
+                        }
+                        else
+                        {
+                            _applicationPartManager.ApplicationParts.Add(new FileSystemAssemblyPart(e.FullPath, assembly));
+                        }
+
                         _onDemandActionDescriptorChangeProvider.TokenSource.Cancel();
                     }
                 }
@@ -54,10 +63,18 @@ namespace RuntimeControllers
             watcher.Deleted += (s, e) =>
             {
                 _logger.LogInformation("Deleted: " + e.FullPath);
-                var existingAssemblyPart = _applicationPartManager.ApplicationParts.FirstOrDefault(x => x is FileSystemAssemblyPart && ((FileSystemAssemblyPart)x).AbsolutePath == e.FullPath);
-                if (existingAssemblyPart != null)
+                var existingfileSystemAssemblyPart = _applicationPartManager.ApplicationParts.FirstOrDefault(x => x is FileSystemAssemblyPart && ((FileSystemAssemblyPart)x).AbsolutePath == e.FullPath);
+                if (existingfileSystemAssemblyPart != null)
                 {
-                    _applicationPartManager.ApplicationParts.Remove(existingAssemblyPart);
+                    _applicationPartManager.ApplicationParts.Remove(existingfileSystemAssemblyPart);
+                    _onDemandActionDescriptorChangeProvider.TokenSource.Cancel();
+                    return;
+                }
+
+                var existingRazorAssemblyPart = _applicationPartManager.ApplicationParts.FirstOrDefault(x => x is FileSystemCompiledRazorAssemblyPart && ((FileSystemCompiledRazorAssemblyPart)x).AbsolutePath == e.FullPath);
+                if (existingRazorAssemblyPart != null)
+                {
+                    _applicationPartManager.ApplicationParts.Remove(existingRazorAssemblyPart);
                     _onDemandActionDescriptorChangeProvider.TokenSource.Cancel();
                 }
             };

@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionConstraint", "src\Act
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileProvider", "src\FileProvider\FileProvider.csproj", "{2E7C86F2-FFEC-4A80-A99F-A03DD8BE6FDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalControllers", "src\ExternalControllers\ExternalControllers.csproj", "{B13F30EC-C45B-4ED1-A981-D77B41F42C62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcPlugin", "src\MvcPlugin\MvcPlugin.csproj", "{B13F30EC-C45B-4ED1-A981-D77B41F42C62}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RuntimeControllers", "src\RuntimeControllers\RuntimeControllers.csproj", "{30DEB842-7B3F-4DF2-B4A3-EBBC0AF3DA52}"
 EndProject
@@ -25,7 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionsDynamicLambda", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationModelProvider", "src\ApplicationModelProvider\ApplicationModelProvider.csproj", "{05714C65-D80F-4C9E-95BA-195D51C9B6E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoMvc", "src\NoMvc\NoMvc.csproj", "{FBEE2917-3F3E-4196-8DCB-3CD2DDEE17E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoMvc", "src\NoMvc\NoMvc.csproj", "{FBEE2917-3F3E-4196-8DCB-3CD2DDEE17E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01", "01", "{0FAF16A5-935F-43FE-8157-D8F2DE7CCCFB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02", "02", "{2728F84C-F948-4E9D-B7E0-DB8480599564}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99", "99", "{311DCBFB-B673-422A-A5BA-EAA9DDDE39FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +90,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C1F26025-0740-4B2E-A2F4-678205F764EB} = {2728F84C-F948-4E9D-B7E0-DB8480599564}
+		{2F8A3929-1E1F-420A-96B0-1595F80DC19C} = {2728F84C-F948-4E9D-B7E0-DB8480599564}
+		{B13F30EC-C45B-4ED1-A981-D77B41F42C62} = {311DCBFB-B673-422A-A5BA-EAA9DDDE39FA}
+		{FBEE2917-3F3E-4196-8DCB-3CD2DDEE17E3} = {0FAF16A5-935F-43FE-8157-D8F2DE7CCCFB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE776A19-FEDA-4531-BF75-6ACEBF417FCC}

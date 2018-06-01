@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace ExternalControllers
+namespace MvcPlugin
 {
     [Route("api/[controller]")]
     public class ItemsController : ControllerBase
