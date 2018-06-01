@@ -1,0 +1,17 @@
+<Project>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.AspNetCore" Version="2.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.App" Version="2.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Authorization" Version="2.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Mvc.WebApiCompatShim" Version="2.1.0" />
+    <PackageReference Update="IdentityServer4" Version="2.2.0" />
+    <PackageReference Update="IdentityServer4.AccessTokenValidation" Version="2.6.0" />
+    <PackageReference Update="Microsoft.CodeAnalysis.CSharp.Scripting" Version="2.8.0" />
+    <PackageReference Update="WindowsAzure.Storage" Version="9.2.0" />
+    <PackageReference Update="ILLink.Tasks" Version="0.1.4-preview-906439" />
+  </ItemGroup>
+</Project>
