@@ -9,7 +9,7 @@ namespace MvcPlugin
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "hello from blob storage" };
+            return new string[] { "hello from external plugin! Eat more vegetables" };
         }
     }
 }

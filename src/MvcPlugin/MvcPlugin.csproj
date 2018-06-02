@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>ExternalControllers</AssemblyName>
-    <RootNamespace>ExternalControllers</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

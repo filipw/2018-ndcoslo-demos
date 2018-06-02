@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ILLink.Tasks" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
