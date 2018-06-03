@@ -331,3 +331,7 @@ ASALocalRun/
 /src/FileProvider/appsettings.Development.json
 *.DS_Store
 *.dll
+/src/AllPackage/out
+/src/AllPackage/out2
+/src/CorePackages/out
+/src/CorePackages/out2

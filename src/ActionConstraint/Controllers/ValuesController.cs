@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ActionConstraint.Controllers
 {
-    [LanguageSpecificRoute("api/values", "de-CH")]
+    [OnlyLocale("de-CH")]
+    [Route("api/values")]
     public class SwissValuesController : Controller
     {
         [HttpGet]
