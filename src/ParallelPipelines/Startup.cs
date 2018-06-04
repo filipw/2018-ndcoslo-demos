@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AdminApi;
+using CustomerApi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
-using ParallelPipelines.CustomerApi;
-using ParallelPipelines.DashboardApi;
 using WebApiContrib.Core;
 
 namespace ParallelPipelines
@@ -22,7 +19,7 @@ namespace ParallelPipelines
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseBranchWithServices("/dashboard",
+            app.UseBranchWithServices("/admin",
                 s =>
                 {
                     s.AddAuthentication(o =>
@@ -37,7 +34,11 @@ namespace ParallelPipelines
                     s.AddMvc(o => 
                     {
                         o.Filters.Add(new AuthorizeFilter("admin"));
-                    }).AddSpecificControllersOnly<DashboardBaseController>();
+                    }).ConfigureApplicationPartManager(manager =>
+                    {
+                        manager.ApplicationParts.Clear();
+                        manager.ApplicationParts.Add(new AssemblyPart(typeof(AdminService).Assembly));
+                    });
                 },
                 a =>
                 {
@@ -49,7 +50,11 @@ namespace ParallelPipelines
                 s =>
                 {
                     s.AddTransient<IHiService, PublicService>();
-                    s.AddMvc().AddSpecificControllersOnly<CustomerBaseController>();
+                    s.AddMvc().ConfigureApplicationPartManager(manager =>
+                    {
+                        manager.ApplicationParts.Clear();
+                        manager.ApplicationParts.Add(new AssemblyPart(typeof(PublicService).Assembly));
+                    });
                 },
                 a =>
                 {

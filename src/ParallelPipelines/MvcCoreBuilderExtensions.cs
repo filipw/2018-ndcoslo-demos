@@ -1,26 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ParallelPipelines
 {
     public static class MvcCoreBuilderExtensions
     {
-        public static IMvcBuilder AddSpecificControllersOnly<TController>(this IMvcBuilder builder) where TController : ControllerBase
+        public static IMvcBuilder AddSpecificControllersOnly<T>(this IMvcBuilder builder)
         {
             return builder.ConfigureApplicationPartManager(manager =>
             {
-                manager.FeatureProviders.Clear();
-                manager.FeatureProviders.Add(new TypedControllerFeatureProvider<TController>());
-            }).AddApplicationPart(typeof(TController).Assembly);
-        }
-
-        public static IMvcCoreBuilder AddSpecificControllersOnly<TController>(this IMvcCoreBuilder builder) where TController : ControllerBase
-        {
-            return builder.ConfigureApplicationPartManager(manager =>
-            {
-                manager.FeatureProviders.Clear();
-                manager.FeatureProviders.Add(new TypedControllerFeatureProvider<TController>());
-            }).AddApplicationPart(typeof(TController).Assembly);
+                manager.ApplicationParts.Clear();
+                manager.ApplicationParts.Add(new AssemblyPart(typeof(T).Assembly));
+            });
         }
     }
 }

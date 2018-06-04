@@ -20,15 +20,9 @@ namespace Convention1
             {
                 foreach (var selectorModel in controller.Selectors)
                 {
-                    if (selectorModel.AttributeRouteModel != null)
-                    {
-                        selectorModel.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(_centralPrefix,
-                            selectorModel.AttributeRouteModel);
-                    }
-                    else
-                    {
-                        selectorModel.AttributeRouteModel = _centralPrefix;
-                    }
+                    selectorModel.AttributeRouteModel = selectorModel.AttributeRouteModel != null
+                        ? AttributeRouteModel.CombineAttributeRouteModel(_centralPrefix, selectorModel.AttributeRouteModel)
+                        : _centralPrefix;
                 }
             }
         }

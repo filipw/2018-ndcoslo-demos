@@ -1,4 +1,6 @@
-﻿namespace ParallelPipelines
+﻿using ParallelPipelines;
+
+namespace CustomerApi
 {
     public class PublicService : IHiService
     {

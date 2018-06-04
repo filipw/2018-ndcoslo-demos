@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ParallelPipelines;
 
-namespace ParallelPipelines.CustomerApi
+namespace CustomerApi
 {
     [Route("[controller]")]
-    public class DataController : CustomerBaseController
+    public class DataController : Controller
     {
         private IHiService _resourceService;
 

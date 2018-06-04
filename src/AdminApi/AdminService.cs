@@ -1,4 +1,6 @@
-﻿namespace ParallelPipelines
+﻿using ParallelPipelines;
+
+namespace AdminApi
 {
     public class AdminService : IHiService
     {
