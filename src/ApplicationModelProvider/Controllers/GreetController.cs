@@ -12,11 +12,15 @@ namespace ApplicationModelProvider.Controllers
     {
         [HttpPost("hello")]
         public ActionResult<string> Post(RequestDto input, IHelloService svc)
-            => svc.SayHello() + " " + input.Name;
+        {
+            return svc.SayHello() + " " + input.Name;
+        }
 
         [HttpPost("bye")]
         public ActionResult<string> Post(RequestDto input, IGoodbyeService svc)
-          => svc.SayGoodbye() + " " + input.Name;
+        {
+            return svc.SayGoodbye() + " " + input.Name;
+        }
     }
 
     public class RequestDto
