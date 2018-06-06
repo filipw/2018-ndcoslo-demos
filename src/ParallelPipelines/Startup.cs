@@ -30,14 +30,14 @@ namespace ParallelPipelines
 
                     s.AddAuthorization(o => o.AddPolicy("admin", b => b.RequireAuthenticatedUser()));
 
-                    s.AddTransient<IHiService, AdminService>();
+                    s.AddTransient<IOrderService, AdminOrderService>();
                     s.AddMvc(o => 
                     {
                         o.Filters.Add(new AuthorizeFilter("admin"));
                     }).ConfigureApplicationPartManager(manager =>
                     {
                         manager.ApplicationParts.Clear();
-                        manager.ApplicationParts.Add(new AssemblyPart(typeof(AdminService).Assembly));
+                        manager.ApplicationParts.Add(new AssemblyPart(typeof(AdminOrderService).Assembly));
                     });
                 },
                 a =>
@@ -49,11 +49,11 @@ namespace ParallelPipelines
             app.UseBranchWithServices("/customer",
                 s =>
                 {
-                    s.AddTransient<IHiService, PublicService>();
+                    s.AddTransient<IOrderService, CustomerOrderService>();
                     s.AddMvc().ConfigureApplicationPartManager(manager =>
                     {
                         manager.ApplicationParts.Clear();
-                        manager.ApplicationParts.Add(new AssemblyPart(typeof(PublicService).Assembly));
+                        manager.ApplicationParts.Add(new AssemblyPart(typeof(CustomerOrderService).Assembly));
                     });
                 },
                 a =>
