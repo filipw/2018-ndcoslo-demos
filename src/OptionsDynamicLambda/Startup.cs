@@ -22,7 +22,7 @@ namespace OptionsDynamicLambda
             services.AddSingleton<IPostConfigureOptions<AlbumsOptions>>(new AlbumsOptionsSetup());
             services.Configure<AlbumsOptions>(Configuration.GetSection("Albums"));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

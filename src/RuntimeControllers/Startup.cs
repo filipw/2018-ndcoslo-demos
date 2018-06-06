@@ -34,7 +34,7 @@ namespace RuntimeControllers
             services.AddSingleton<IActionDescriptorChangeProvider>(f => f.GetService<OnDemandActionDescriptorChangeProvider>());
             services.AddSingleton<ApplicationPartWatcher>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationPartWatcher applicationPartWatcher)

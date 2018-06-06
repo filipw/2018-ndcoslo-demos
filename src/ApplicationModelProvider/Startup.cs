@@ -31,7 +31,8 @@ namespace ApplicationModelProvider
 
             services.TryAddEnumerable(
                 ServiceDescriptor.Transient<IApplicationModelProvider, ActionDependencyModelProvider>());
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -27,7 +27,7 @@ namespace FileProvider
             services.AddSingleton(blobOptions);
             services.AddSingleton(azureBlobFileProvider);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).ConfigureApplicationPartManager(a =>
+            services.AddMvc().ConfigureApplicationPartManager(a =>
             {
                 var binDirectory = azureBlobFileProvider.GetDirectoryContents("bin");
 
