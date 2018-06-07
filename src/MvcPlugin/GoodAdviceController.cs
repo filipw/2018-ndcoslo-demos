@@ -2,7 +2,7 @@
 
 namespace MvcPlugin
 {
-    public class ExternalHomeController : Controller
+    public class GoodAdviceController : Controller
     {
         public IActionResult Index()
         {

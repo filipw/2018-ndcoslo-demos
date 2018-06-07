@@ -7,23 +7,23 @@ using Microsoft.AspNetCore.Mvc;
 namespace ActionConstraint.Controllers
 {
     [OnlyLocale("de-CH")]
-    [Route("api/values")]
-    public class SwissValuesController : Controller
+    [Route("api/movies")]
+    public class SwissMoviesController : Controller
     {
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1 for Switzerland", "value2 for Switzerland" };
+            return new string[] { "Godfather 1", "Heidi", "Tatort" };
         }
     }
 
-    [Route("api/values")]
-    public class ValuesController : Controller
+    [Route("api/movies")]
+    public class MoviesController : Controller
     {
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Godfather 1", "Godfather 2", "Scarface", "Casino" };
         }
     }
 }

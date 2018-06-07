@@ -48,15 +48,7 @@ namespace FileProvider
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
 
             var blobFileProvider = app.ApplicationServices.GetRequiredService<AzureBlobFileProvider>();

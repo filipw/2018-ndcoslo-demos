@@ -39,15 +39,7 @@ namespace RuntimeControllers
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationPartWatcher applicationPartWatcher)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseMvc(routes =>
             {

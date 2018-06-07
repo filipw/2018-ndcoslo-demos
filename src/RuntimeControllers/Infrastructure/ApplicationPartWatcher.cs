@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Logging;
 
@@ -41,6 +42,9 @@ namespace RuntimeControllers
                 _logger.LogInformation("Created: " + e.FullPath);
                 if (string.Equals(Path.GetExtension(e.FullPath), ".dll", StringComparison.OrdinalIgnoreCase))
                 {
+                    //hack to let the file complete the creation...
+                    Thread.Sleep(1000); 
+
                     using (var fs = new FileStream(e.FullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
                         var buffer = new byte[fs.Length];

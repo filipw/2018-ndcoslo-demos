@@ -26,8 +26,8 @@ namespace ApplicationModelProvider
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IHelloService, HelloService>();
-            services.AddSingleton<IGoodbyeService, GoodbyeService>();
+            services.AddSingleton<ISadService, SadService>();
+            services.AddSingleton<IHappyService, HappyService>();
 
             services.TryAddEnumerable(
                 ServiceDescriptor.Transient<IApplicationModelProvider, ActionDependencyModelProvider>());
@@ -37,37 +37,29 @@ namespace ApplicationModelProvider
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-
+            app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
 
-    public class HelloService : IHelloService
+    public class HappyService : IHappyService
     {
-        public string SayHello() => "Hello";
+        public string BeHappy(string name) => $"😂🦄{name}✨🌈🎉";
     }
 
-    public interface IHelloService
+    public interface IHappyService
     {
-        string SayHello();
+        string BeHappy(string name);
     }
 
-    public class GoodbyeService : IGoodbyeService
+    public class SadService : ISadService
     {
-        public string SayGoodbye() => "Bye";
+        public string BeSad(string name) => $"😢🚬{name}💀💩🇸🇪";
     }
 
-    public interface IGoodbyeService
+    public interface ISadService
     {
-        string SayGoodbye();
+        string BeSad(string name);
     }
 }

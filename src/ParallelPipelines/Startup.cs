@@ -33,7 +33,7 @@ namespace ParallelPipelines
                     s.AddTransient<IOrderService, AdminOrderService>();
                     s.AddMvc(o => 
                     {
-                        o.Filters.Add(new AuthorizeFilter("admin"));
+                        //o.Filters.Add(new AuthorizeFilter("admin"));
                     }).ConfigureApplicationPartManager(manager =>
                     {
                         manager.ApplicationParts.Clear();

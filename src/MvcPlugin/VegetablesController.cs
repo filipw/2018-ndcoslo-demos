@@ -4,12 +4,12 @@ using System.Collections.Generic;
 namespace MvcPlugin
 {
     [Route("api/[controller]")]
-    public class ItemsController : ControllerBase
+    public class VegetablesController : ControllerBase
     {
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "hello from external plugin! Eat more vegetables" };
+            return new string[] { "🥕", "🌽", "🌶" };
         }
     }
 }
