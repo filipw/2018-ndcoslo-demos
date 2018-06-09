@@ -24,7 +24,6 @@ namespace FileProvider
 
             var blobOptions = Configuration.GetSection("AzureBlobOptions").Get<AzureBlobOptions>();
             var azureBlobFileProvider = new AzureBlobFileProvider(blobOptions);
-            services.AddSingleton(blobOptions);
             services.AddSingleton(azureBlobFileProvider);
 
             services.AddMvc().ConfigureApplicationPartManager(a =>

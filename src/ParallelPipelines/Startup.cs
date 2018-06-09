@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ParallelPipelines
 {
-
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)

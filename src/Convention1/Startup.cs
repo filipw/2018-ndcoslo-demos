@@ -19,7 +19,7 @@ namespace Convention1
         {
             services.AddMvc(o =>
             {
-                o.Conventions.Insert(0, new GlobalRoutePrefixConvention("api/v{versionNumber:int}/[controller]"));
+                o.Conventions.Insert(0, new GlobalRoutePrefixConvention("api/[controller]"));
             });
         }
 

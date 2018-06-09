@@ -14,4 +14,13 @@ namespace Convention1.Controllers
             return new string[] { "value1", "value2" };
         }
     }
+
+    public class ItemsController : ControllerBase
+    {
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(new string[] { "item1", "item2" });
+        }
+    }
 }
