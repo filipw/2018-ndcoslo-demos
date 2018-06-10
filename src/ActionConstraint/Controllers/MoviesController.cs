@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ActionConstraint.Controllers
 {
-    [OnlyLocale("de-CH")]
+    [SwitzerlandOnly]
     [Route("api/movies")]
     public class SwissMoviesController : Controller
     {

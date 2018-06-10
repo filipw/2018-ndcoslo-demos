@@ -18,11 +18,6 @@ namespace Demos
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
-
             app.UseMvc();
         }
     }

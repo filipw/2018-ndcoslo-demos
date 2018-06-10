@@ -6,7 +6,17 @@ namespace MvcPlugin
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new Advice
+            {
+                Title = "Vegetables",
+                Text = "Eat more vegetables"
+            });
         }
+    }
+
+    public class Advice
+    {
+        public string Title { get; set; }
+        public string Text { get; set; }
     }
 }

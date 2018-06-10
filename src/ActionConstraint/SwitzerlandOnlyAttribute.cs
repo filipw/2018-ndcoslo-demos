@@ -3,15 +3,15 @@ using System;
 
 namespace ActionConstraint
 {
-    public class OnlyLocaleAttribute : Attribute, IActionConstraintFactory
+    public class SwitzerlandOnlyAttribute : Attribute, IActionConstraintFactory
     {
         private AcceptLanguageActionConstraint _constraint;
 
         public bool IsReusable => true;
 
-        public OnlyLocaleAttribute(string locale)
+        public SwitzerlandOnlyAttribute()
         {
-            _constraint = new AcceptLanguageActionConstraint(locale);
+            _constraint = new AcceptLanguageActionConstraint("de-CH");
         }
 
         public IActionConstraint CreateInstance(IServiceProvider services)

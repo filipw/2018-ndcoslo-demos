@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Threading;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.Extensions.Logging;
@@ -10,6 +13,7 @@ namespace RuntimeControllers
 {
     public class ApplicationPartWatcher
     {
+        private ConcurrentDictionary<string, List<Assembly>> _loadedAssemblies = new ConcurrentDictionary<string, List<Assembly>>();
         private readonly OnDemandActionDescriptorChangeProvider _onDemandActionDescriptorChangeProvider;
         private readonly ApplicationPartManager _applicationPartManager;
         private readonly ILogger<ApplicationPartWatcher> _logger;
@@ -32,7 +36,7 @@ namespace RuntimeControllers
             var watcher = new FileSystemWatcher()
             {
                 Path = configFolderPath,
-                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName,
+                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.DirectoryName
             };
 
             watcher.Changed += (s, e) => _logger.LogInformation("Changed: " + e.FullPath);
@@ -40,47 +44,50 @@ namespace RuntimeControllers
             watcher.Created += (s, e) =>
             {
                 _logger.LogInformation("Created: " + e.FullPath);
-                if (string.Equals(Path.GetExtension(e.FullPath), ".dll", StringComparison.OrdinalIgnoreCase))
+                //hack to let the file complete the creation...
+                Thread.Sleep(1000);
+
+                var loadedFolderAssemblies = new List<Assembly>();
+                foreach (var file in Directory.EnumerateFiles(e.FullPath, "*.dll"))
                 {
-                    //hack to let the file complete the creation...
-                    Thread.Sleep(1000); 
-
-                    using (var fs = new FileStream(e.FullPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                     {
-                        var buffer = new byte[fs.Length];
-                        fs.Read(buffer, 0, (int)fs.Length);
-                        var assembly = Assembly.Load(buffer);
+                        var assembly = AssemblyLoadContext.Default.LoadFromStream(fs);
+                        loadedFolderAssemblies.Add(assembly);
 
-                        if (e.FullPath.EndsWith("Views.dll", StringComparison.OrdinalIgnoreCase))
+                        var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
+                        foreach (var part in partFactory.GetApplicationParts(assembly))
                         {
-                            _applicationPartManager.ApplicationParts.Add(new FileSystemCompiledRazorAssemblyPart(e.FullPath, assembly));
-                        }
-                        else
-                        {
-                            _applicationPartManager.ApplicationParts.Add(new FileSystemAssemblyPart(e.FullPath, assembly));
+                            _applicationPartManager.ApplicationParts.Add(part);
                         }
 
-                        _onDemandActionDescriptorChangeProvider.TokenSource.Cancel();
                     }
+                }
+
+                if (loadedFolderAssemblies.Any())
+                {
+                    _loadedAssemblies[e.FullPath] = loadedFolderAssemblies;
+                    _onDemandActionDescriptorChangeProvider.TokenSource.Cancel();
                 }
             };
             watcher.Deleted += (s, e) =>
             {
                 _logger.LogInformation("Deleted: " + e.FullPath);
-                var existingfileSystemAssemblyPart = _applicationPartManager.ApplicationParts.FirstOrDefault(x => x is FileSystemAssemblyPart && ((FileSystemAssemblyPart)x).AbsolutePath == e.FullPath);
-                if (existingfileSystemAssemblyPart != null)
+
+                if (_loadedAssemblies.TryGetValue(e.FullPath, out var loadedFolderAssemblies))
                 {
-                    _applicationPartManager.ApplicationParts.Remove(existingfileSystemAssemblyPart);
+                    foreach (var assembly in loadedFolderAssemblies)
+                    {
+                        var existingAssemblyPart = _applicationPartManager.ApplicationParts.FirstOrDefault(x => x.Name == assembly.GetName().Name);
+                        if (existingAssemblyPart != null)
+                        {
+                            _applicationPartManager.ApplicationParts.Remove(existingAssemblyPart);
+                        }
+                    }
+
                     _onDemandActionDescriptorChangeProvider.TokenSource.Cancel();
-                    return;
                 }
 
-                var existingRazorAssemblyPart = _applicationPartManager.ApplicationParts.FirstOrDefault(x => x is FileSystemCompiledRazorAssemblyPart && ((FileSystemCompiledRazorAssemblyPart)x).AbsolutePath == e.FullPath);
-                if (existingRazorAssemblyPart != null)
-                {
-                    _applicationPartManager.ApplicationParts.Remove(existingRazorAssemblyPart);
-                    _onDemandActionDescriptorChangeProvider.TokenSource.Cancel();
-                }
             };
             watcher.EnableRaisingEvents = true;
         }
