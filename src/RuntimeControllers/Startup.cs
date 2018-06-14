@@ -41,13 +41,7 @@ namespace RuntimeControllers
         {
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    "default",
-                    "{controller}/{action}/{id?}",
-                    new { controller = "Home", action = "Index" });
-            });
+            app.UseMvcWithDefaultRoute();
 
             Task.Run(() => applicationPartWatcher.Watch("plugins"));
         }

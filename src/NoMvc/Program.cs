@@ -42,7 +42,7 @@ namespace NoMvc
                 })
                 .Configure(app =>
                 {
-                    app.Map("/openid", id =>
+                    app.Map("/identity", id =>
                     {
                         // use embedded identity server to issue tokens
                         id.UseIdentityServer();
