@@ -37,7 +37,7 @@ namespace NoMvc
                     .AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                     .AddIdentityServerAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme, o =>
                     {
-                        o.Authority = "https://localhost:5001/openid";
+                        o.Authority = "https://localhost:5001/identity";
                     });
                 })
                 .Configure(app =>
